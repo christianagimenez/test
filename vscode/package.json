@@ -1,0 +1,257 @@
+{
+  "name": "codelingo",
+  "publisher": "codelingo",
+  "displayName": "CodeLingo Notebooks",
+  "description": "Notebooks combine the ease of note-taking with the speed of dev tools",
+  "version": "1.7.4",
+  "icon": "images/codelingo-white-on-dark.png",
+  "engines": {
+    "vscode": "^1.47.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "share",
+    "sharing",
+    "navigate",
+    "show",
+    "highlight"
+  ],
+  "categories": [
+    "Notebooks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codelingo/notebooks-releases"
+  },
+  "bugs": {
+    "url": "https://github.com/codelingo/notebooks-releases/issues"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./dist/extension",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codelingo-activitybar",
+          "title": "CodeLingo Notebooks",
+          "icon": "images/codelingo-logo-active.svg"
+        }
+      ]
+    },
+    "views": {
+      "codelingo-activitybar": [
+        {
+          "id": "activitybar.codelingo",
+          "type": "webview",
+          "name": "codelingo",
+          "icon": "images/codelingo-logo-active.svg",
+          "contextualTitle": "CodeLingo Notebooks"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "codelingo-activitybar",
+        "contents": "[Toggle codelingo](command:codelingo.toggle)",
+        "when": "true"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "codelingo.addPathToNotebook",
+          "group": "3_compare",
+          "when": "!explorerResourceIsFolder"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "codelingo.showReferencedNotebooks_1",
+          "when": "false"
+        },
+        {
+          "command": "codelingo.completeSetup",
+          "when": "false"
+        },
+        {
+          "command": "codelingo.openNotebooksHome",
+          "when": "false"
+        },
+        {
+          "command": "codelingo.addPathToNotebook",
+          "when": "false"
+        }
+      ],
+      "editor/title": [
+        {
+          "when": "editorIsOpen && codelingo:decorations == visible",
+          "command": "codelingo.hideReferencedNotebooks",
+          "group": "navigation@1"
+        },
+        {
+          "when": "editorIsOpen && codelingo:decorations != visible && !codelingo:snippetCount",
+          "command": "codelingo.showReferencedNotebooks",
+          "group": "navigation@1"
+        },
+        {
+          "when": "editorIsOpen && codelingo:decorations != visible && codelingo:snippetCount > 0",
+          "command": "codelingo.showReferencedNotebooks_1",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "codelingo.completeSetup",
+        "title": "CodeLingo: Complete Setup..."
+      },
+      {
+        "command": "codelingo.openNotebooksHome",
+        "title": "CodeLingo: Open Notebooks Home..."
+      },
+      {
+        "command": "codelingo.addToNotebook",
+        "title": "CodeLingo: Add to Notebook...",
+        "icon": "$(add)"
+      },
+      {
+        "command": "codelingo.addToLastNotebook",
+        "title": "CodeLingo: Add to last Notebook",
+        "icon": "$(add)"
+      },
+      {
+        "command": "codelingo.addPathToNotebook",
+        "title": "CodeLingo: Add to Notebook...",
+        "icon": "$(add)"
+      },
+      {
+        "command": "codelingo.openNotebook",
+        "title": "CodeLingo: Open Notebook...",
+        "icon": "$(add)"
+      },
+      {
+        "command": "codelingo.debug",
+        "title": "CodeLingo: Debugging tools..."
+      },
+      {
+        "command": "codelingo.showReferencedNotebooks",
+        "title": "CodeLingo: Show referenced Notebooks",
+        "icon": "images/codelingo-logo-notify-0.svg"
+      },
+      {
+        "command": "codelingo.showReferencedNotebooks_1",
+        "title": "CodeLingo: Show referenced Notebooks",
+        "icon": "images/codelingo-logo-notify-1+.svg"
+      },
+      {
+        "command": "codelingo.hideReferencedNotebooks",
+        "title": "CodeLingo: Hide referenced Notebooks",
+        "icon": "images/codelingo-logo-active.svg"
+      },
+      {
+        "command": "codelingo.shareSnippet",
+        "title": "CodeLingo: Share snippet..."
+      },
+      {
+        "command": "codelingo.logIn",
+        "title": "CodeLingo: Log in..."
+      },
+      {
+        "command": "codelingo.captureDiff",
+        "title": "CodeLingo: Capture Notebook from local changes..."
+      },
+      {
+        "command": "codelingo.createTeam",
+        "title": "CodeLingo: Create a new team..."
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "codelingo.addToNotebook",
+        "args": {
+          "isShortcut": true
+        },
+        "key": "alt+p",
+        "mac": "alt+p"
+      },
+      {
+        "command": "codelingo.addToLastNotebook",
+        "args": {
+          "isShortcut": true
+        },
+        "key": "alt+shift+p",
+        "mac": "alt+shift+p"
+      },
+      {
+        "command": "codelingo.shareSnippet",
+        "args": {
+          "isShortcut": true
+        },
+        "key": "alt+shift+s",
+        "mac": "alt+shift+s"
+      }
+    ],
+    "configuration": {
+      "title": "CodeLingo",
+      "properties": {
+        "codelingo.showReferencedNotebooksInFiles": {
+          "type": "string",
+          "default": "Off by default",
+          "enum": [
+            "On by default",
+            "Off by default"
+          ],
+          "enumDescriptions": [
+            "Decorate files when opened if there are Notebooks referenced",
+            "Decorations are off when files are opened but can be turned on manually"
+          ],
+          "description": "Indicates whether captured snippets are shown alongside code by default."
+        },
+        "codelingo.flags": {
+          "type": "string",
+          "description": "Development use only"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "dependencies": "yarn install",
+    "typecheck": "tsc -w",
+    "webpack:watch": "webpack --mode development --watch",
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "compile": "tsc -p ./",
+    "pretest": "yarn run compile",
+    "test": "jest --watchAll --collectCoverage=false --reporters jest-silent-reporter",
+    "old.test": "node ./out/test/runTest.js"
+  },
+  "dependencies": {
+    "auth0-js": "^9.13.4",
+    "axios": "^0.19.2",
+    "firebase": "^8.4.2",
+    "global": "^4.4.0",
+    "graphql": "^15.6.0",
+    "graphql-request": "^3.5.0",
+    "mixpanel": "^0.13.0",
+    "query-string": "^6.13.1",
+    "shortid": "^2.2.16"
+  },
+  "devDependencies": {
+    "@types/auth0-js": "^9.13.4",
+    "@types/glob": "^7.1.1",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^13.11.0",
+    "@types/shortid": "^0.0.29",
+    "@types/vscode": "^1.31.0",
+    "glob": "^7.1.6",
+    "jest": "^26.6.3",
+    "jest-silent-reporter": "^0.4.0",
+    "ts-jest": "^26.5.2",
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.1.2",
+    "webpack": "^5.3.1",
+    "webpack-cli": "^4.1.0"
+  }
+}

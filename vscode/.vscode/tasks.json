@@ -1,0 +1,53 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // auto runs on startup
+      "label": "startup",
+      "dependsOrder": "sequence",
+      "dependsOn": ["background"],
+      "group": { "kind": "build", "isDefault": true },
+      "runOptions": { "runOn": "folderOpen" },
+      "problemMatcher": []
+    },
+    {
+      // starts the other two tasks on startup
+      "label": "background",
+      "dependsOrder": "parallel",
+      "dependsOn": ["webpack", "typecheck"],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      // webpack build + watch
+      "label": "webpack",
+      "type": "npm",
+      "script": "webpack:watch",
+      "detail": "webpack --mode development --watch",
+      "isBackground": true,
+      "presentation": { "group": "vscode", "echo": false, "reveal": "silent" }
+    },
+    {
+      // type-checking
+      "label": "typecheck",
+      "type": "npm",
+      "script": "typecheck",
+      "isBackground": true,
+      "presentation": {
+        "group": "tsc",
+        "echo": false,
+        "reveal": "never",
+        "revealProblems": "never"
+      },
+      "problemMatcher": ["$tsc-watch"]
+    },
+    {
+      "label": "npm: vscode-webpack-dev",
+      "type": "npm",
+      "script": "webpack-dev",
+      "problemMatcher": ["$tsc-watch"],
+      "detail": "webpack --mode development",
+      "isBackground": true,
+      "presentation": { "reveal": "never" }
+    }
+  ]
+}

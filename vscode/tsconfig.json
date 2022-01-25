@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "ES2018",
+    "outDir": "out",
+    "lib": ["esnext", "DOM" /* required by firebase :eye-roll */],
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "**/node_modules/**", "./src/**/*.spec.ts"],
+  "references": [
+    {
+      "path": "../common"
+    }
+  ]
+}
